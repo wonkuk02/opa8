@@ -3,7 +3,7 @@
 1. 일단 /data 디렉토리에서 0.8.9 브렌치를 클론합니다.
 ```
 cd /data/ && mv openpilot openpilot-backup;
-git clone https://github.com/kans-ky/oneplus.git openpilot --branch 0.8.9-Volt
+git clone https://github.com/kans-ky/opa8.git openpilot --branch 089-oneplus3
 ```
 
 2. 아래 명령 실행합니다
