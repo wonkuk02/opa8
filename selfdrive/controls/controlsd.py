@@ -47,7 +47,7 @@ IGNORE_PROCESSES = {"rtshield", "uploader", "deleter", "loggerd", "logmessaged",
 
 ACTUATOR_FIELDS = set(car.CarControl.Actuators.schema.fields.keys())
 
-MIN_CURVE_SPEED = 45. * CV.KPH_TO_MS
+MIN_CURVE_SPEED = 41. * CV.KPH_TO_MS
 
 ThermalStatus = log.DeviceState.ThermalStatus
 State = log.ControlsState.OpenpilotState
@@ -419,7 +419,7 @@ class Controls:
         curv = d2y / (1 + dy ** 2) ** 1.5
 
         start = int(interp(v_ego, [12.5, 35.], [5, TRAJECTORY_SIZE-10]))
-        curv = curv[start:min(start+10, TRAJECTORY_SIZE)]
+        curv = curv[start:min(start + 10, TRAJECTORY_SIZE)]
         a_y_max = 2.975 - v_ego * 0.0375  # ~1.85 @ 75mph, ~2.6 @ 25mph
         v_curvature = np.sqrt(a_y_max / np.clip(np.abs(curv), 1e-4, None))
         model_speed = np.mean(v_curvature) * 0.95 * ntune_scc_get("sccCurvatureFactor")
@@ -574,7 +574,7 @@ class Controls:
     else:
       lac_log = log.ControlsState.LateralDebugState.new_message()
       if self.sm.rcv_frame['testJoystick'] > 0 and self.active:
-        actuators.accel = 4.0*clip(self.sm['testJoystick'].axes[0], -1, 1)
+        actuators.accel = 4.0 * clip(self.sm['testJoystick'].axes[0], -1, 1)
 
         steer = clip(self.sm['testJoystick'].axes[1], -1, 1)
         # max angle is 45 for angle-based cars
