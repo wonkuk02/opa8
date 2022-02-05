@@ -33,7 +33,6 @@ class LatControlPID(LatControl):
         self.steerKiV = [float(self.kegman_kans.conf['Ki'])]
         # self.steerKdV = [float(self.kegman_kans.conf['Kd'])]
         self.steerKf = float(self.kegman_kans.conf['Kf'])
-        # self.steerLimitTimer = float(self.kegman_kans.conf['steerLimitTimer'])
         self.pid = PIDController((CP.lateralTuning.pid.kpBP, self.steerKpV),
                             (CP.lateralTuning.pid.kiBP, self.steerKiV),
                             (CP.lateralTuning.pid.kdBP, CP.lateralTuning.pid.kdV),
