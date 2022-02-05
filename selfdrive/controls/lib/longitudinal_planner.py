@@ -14,11 +14,11 @@ from selfdrive.controls.lib.longitudinal_mpc_lib.long_mpc import T_IDXS as T_IDX
 from selfdrive.controls.lib.drive_helpers import V_CRUISE_MAX, CONTROL_N
 from selfdrive.swaglog import cloudlog
 
-LON_MPC_STEP = 0.1  # first step(0.1s)
+LON_MPC_STEP = 0.2  # first step(0.2s)
 AWARENESS_DECEL = -0.2     # car smoothly decel at .2m/s^2 when user is distracted
 A_CRUISE_MIN = -3.2
-A_CRUISE_MAX_VALS = [1.9, 1.8, 1.5, 0.7, 0.5, 0.35]
-A_CRUISE_MAX_BP = [-0.5, 4.2, 8.3, 13.9, 19.4, 33.]
+A_CRUISE_MAX_VALS = [1.2, 1.9, 1.5, 0.7, 0.5, 0.35]
+A_CRUISE_MAX_BP = [-0.1, 4.2, 8.3, 13.9, 19.4, 33.]
 
 # Lookup table for turns
 _A_TOTAL_MAX_V = [1.7, 3.2]
