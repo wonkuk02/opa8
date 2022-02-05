@@ -183,8 +183,8 @@ while True:
   if float(kegman_kans.conf['Kf']) < 0 and float(kegman_kans.conf['Kf']) != -1:
     kegman_kans.conf['Kf'] = "0"
 
-  if float(kegman_kans.conf['Kf']) > 0.01:
-    kegman_kans.conf['Kf'] = "0.01"
+  if float(kegman_kans.conf['Kf']) > 1.2:
+    kegman_kans.conf['Kf'] = "1.2"
 
   kegman_kans.conf['Kf'] = str("{:.6f}".format(float(kegman_kans.conf['Kf'])))
 
@@ -195,10 +195,10 @@ while True:
     kegman_kans.conf['steerLimitTimer'] = "7"
 
   if float(kegman_kans.conf['deadzone']) < 0.01 and float(kegman_kans.conf['deadzone']) != -1:
-    kegman_kans.conf['deadzone'] = "0"
+    kegman_kans.conf['deadzone'] = "0.0"
 
   if float(kegman_kans.conf['deadzone']) > 1:
-    kegman_kans.conf['deadzone'] = "1"
+    kegman_kans.conf['deadzone'] = "1.0"
 
   if kegman_kans.conf['liveParams'] != "1" and kegman_kans.conf['liveParams'] != "0":
     kegman_kans.conf['liveParams'] = "1"

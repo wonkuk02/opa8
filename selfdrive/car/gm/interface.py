@@ -67,9 +67,7 @@ class CarInterface(CarInterfaceBase):
     ret.minSteerSpeed = 7 * CV.MPH_TO_MS
     ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
     ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.2], [0.00]]
-    ret.lateralTuning.pid.kf = 0.00006   # full torque for 20 deg at 80mph means 0.00007818594
-    ret.steerMaxBP = [0., 8.3, 33.]
-    ret.steerMaxV = [1.65, 1.54, 1.2]
+    ret.lateralTuning.pid.kf = 0.00004   # full torque for 20 deg at 80mph means 0.00007818594
     ret.steerRateCost = 1.0
     ret.steerActuatorDelay = 0.1
 
@@ -79,15 +77,19 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 1607. + STD_CARGO_KG
       ret.wheelbase = 2.69
       ret.steerRatio = 17.7
-      tire_stiffness_factor = 0.464 # Stock Michelin Energy Saver A/S, LiveParameters
+      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
+      ret.lateralTuning.pid.kiV, ret.lateralTuning.pid.kpV = [[0.01], [0.2]]
+      tire_stiffness_factor = 0.469 # Stock Michelin Energy Saver A/S, LiveParameters
+      ret.steerMaxBP = [0.]
+      ret.steerMaxV = [1.25]
       ret.steerRatioRear = 0.
-      ret.centerToFront = ret.wheelbase * 0.42  # wild guess
+      ret.centerToFront = ret.wheelbase * 0.45  # wild guess
       ret.lateralTuning.pid.kf = 1. # get_steer_feedforward_volt()
       ret.steerActuatorDelay = 0.2
 
       # D gain
       ret.lateralTuning.pid.kdBP = [0., 15., 33.]
-      ret.lateralTuning.pid.kdV = [0.005, 0.09, 0.15]  #corolla from shane fork : 0.725
+      ret.lateralTuning.pid.kdV = [0.29, 0.65, 0.725]  #corolla from shane fork : 0.725
 
     elif candidate == CAR.MALIBU:
       # supports stop and go, but initial engage must be above 18mph (which include conservatism)
@@ -157,17 +159,17 @@ class CarInterface(CarInterfaceBase):
     ret.longitudinalTuning.deadzoneBP = [0., 100.*CV.KPH_TO_MS]
     ret.longitudinalTuning.deadzoneV = [0.0, .14]
 
-    ret.longitudinalTuning.kpBP = [-1.08 * CV.KPH_TO_MS, 10 * CV.KPH_TO_MS, 20 * CV.KPH_TO_MS, 50 * CV.KPH_TO_MS, 70 * CV.KPH_TO_MS, 120 * CV.KPH_TO_MS]
+    ret.longitudinalTuning.kpBP = [-.36 * CV.KPH_TO_MS, 10 * CV.KPH_TO_MS, 20 * CV.KPH_TO_MS, 50 * CV.KPH_TO_MS, 70 * CV.KPH_TO_MS, 120 * CV.KPH_TO_MS]
     ret.longitudinalTuning.kpV = [4.6, 3.8, 3.2, 1.3, 0.6, 0.3]
-    ret.longitudinalTuning.kiBP = [-1.08 * CV.KPH_TO_MS, 20 * CV.KPH_TO_MS, 30 * CV.KPH_TO_MS, 50 * CV.KPH_TO_MS, 70 * CV.KPH_TO_MS, 120 * CV.KPH_TO_MS]
+    ret.longitudinalTuning.kiBP = [-.36 * CV.KPH_TO_MS, 20 * CV.KPH_TO_MS, 30 * CV.KPH_TO_MS, 50 * CV.KPH_TO_MS, 70 * CV.KPH_TO_MS, 120 * CV.KPH_TO_MS]
     ret.longitudinalTuning.kiV = [0.5, 0.53, 0.62, 0.68, 0.6, 0.36]
-    ret.longitudinalTuning.kdBP = [0., 15., 33.]
-    ret.longitudinalTuning.kdV = [0.09, 0.935, 1.65]
+    ret.longitudinalTuning.kdBP = [-0.1, 15., 33.]
+    ret.longitudinalTuning.kdV = [0.29, 0.65, 0.95]
     ret.stopAccel = -2.0
     ret.stoppingDecelRate = 3.2
     ret.vEgoStopping = 0.6
-    ret.vEgoStarting = 0.16
-    ret.steerLimitTimer = 0.35
+    ret.vEgoStarting = 0.25
+    ret.steerLimitTimer = 3.5
     ret.radarTimeStep = 0.0667  # GM radar runs at 15Hz instead of standard 20Hz
 
     return ret
